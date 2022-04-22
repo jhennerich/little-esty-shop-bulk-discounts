@@ -53,6 +53,11 @@ RSpec.describe 'merchant dashboard' do
     expect(current_path).to eq(merchant_invoices_path(@merchant1))
   end
 
+  it "displays a link to view a merchants discounts index page" do
+    click_on("View all Discounts")
+    expect(current_path).to eq("/merchant/#{@merchant1.id}/bulk_discounts")
+  end
+
   it "merchant dashboard items ready to ship" do
     merchant_1 = Merchant.create!(name: "Pabu")
     item_1 = merchant_1.items.create!(name: "spoon", description: "stamped stainless steel, not deburred", unit_price: 80, status: 1, merchant_id: merchant_1.id)
