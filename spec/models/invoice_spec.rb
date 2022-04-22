@@ -20,12 +20,21 @@ RSpec.describe Invoice, type: :model do
       @customer1 = Customer.create!(first_name: "Loki", last_name: "R")
 
       @invoice1 = @customer1.invoices.create!(status: "completed")
+      @invoice2 = @customer1.invoices.create!(status: 0)
 
       @ii1 = InvoiceItem.create!(invoice_id: @invoice1.id, item_id: @item1.id, status: 1, quantity: 20, unit_price: 10)
       @ii2 = InvoiceItem.create!(invoice_id: @invoice1.id, item_id: @item2.id, status: 1, quantity: 5, unit_price: 12)
     end
     it "returns total revenue from all items in invoice" do
       expect(@invoice1.total_rev).to eq(260)
+    end
+
+    it "#pending_invoices" do
+      expect(Invoice.pending_invoices).to eq([@invoice2])
+    end
+
+    it "#format_time" do
+      expect(@invoice2.format_time).to eq(Time.now.strftime('%A, %B %e, %Y'))
     end
   end
 end

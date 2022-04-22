@@ -26,7 +26,7 @@ class Merchant < ApplicationRecord
   end
 
   def best_date_by_revenue
-    invoices.joins(:transactions)
+wip =  invoices.joins(:transactions)
     .where('transactions.result = ?', 'success')
     .where(status: "completed")
     .select('invoices.*, sum(invoice_items.quantity * invoice_items.unit_price) as revenue')
@@ -41,7 +41,7 @@ class Merchant < ApplicationRecord
       return "No sales data"
     end
   end
-  
+
   def self.top_5_merchants
     joins(:invoice_items, :transactions)
     .where('result = ?', 'success')

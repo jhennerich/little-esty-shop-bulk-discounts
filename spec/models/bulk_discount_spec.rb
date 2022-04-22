@@ -7,6 +7,6 @@ RSpec.describe BulkDiscount, type: :model do
   end
 
   describe "relationships" do
-    it { should belongs_to :merchant }
+    it { should belong_to :merchant }
   end
 end
