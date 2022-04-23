@@ -61,4 +61,12 @@ RSpec.describe 'Bulk Discount Index Page' do
     expect(page).to_not have_content(@bulk_discount3.name)
     expect(page).to_not have_content(@bulk_discount4.name)
   end
+
+  it "has a link to each discounts show page" do
+    click_on("View all Discounts")
+    expect(page).to have_link(@bulk_discount.name)
+    expect(page).to have_link(@bulk_discount2.name)
+    click_on(@bulk_discount.name)
+    expect(current_path).to eq("/merchant/#{@merchant1.id}/#{@bulk_discount.id}")
+  end
 end
