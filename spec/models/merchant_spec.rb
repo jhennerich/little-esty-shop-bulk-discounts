@@ -110,7 +110,8 @@ RSpec.describe Merchant, type: :model do
 
       it '#best_date_formatted' do
         expect(@merchant2.best_date_formatted).to eq("No sales data")
-        expect(@merchant1.best_date_formatted).to eq("Friday, April 22 2022")
+        day = @merchant1.created_at.strftime("%A, %B %d %Y")
+        expect(@merchant1.best_date_formatted).to eq(day)
       end
     end
   end
