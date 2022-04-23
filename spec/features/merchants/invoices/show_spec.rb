@@ -5,6 +5,9 @@ RSpec.describe 'merchant dashboard' do
     @merchant1 = Merchant.create!(name: "Pabu")
     @merchant2 = Merchant.create!(name: "Ian")
 
+    @bulk_discount1 = @merchant1.bulk_discounts.create!(name: "Discount A", percentage: 10, quantity_threshold: 5)
+    @bulk_discount2 = @merchant1.bulk_discounts.create!(name: "Discount B", percentage: 10, quantity_threshold: 1)
+
     @item1 = Item.create!(name: "Brush", description: "Brushy", unit_price: 10, merchant_id: @merchant1.id)
     @item2 = Item.create!(name: "Peanut Butter", description: "Yummy", unit_price: 12, merchant_id: @merchant1.id)
     @item3 = Item.create!(name: "Zenitsu Pop Funko", description: "Coolest thing ever", unit_price: 100, merchant_id: @merchant2.id)
@@ -17,10 +20,10 @@ RSpec.describe 'merchant dashboard' do
     @invoice2 = @customer2.invoices.create!(status: "completed")
     @invoice3 = @customer3.invoices.create!(status: "completed")
 
-    @ii1 = InvoiceItem.create!(invoice_id: @invoice1.id, item_id: @item1.id, status: 1, quantity: 20, unit_price: 10)
-    @ii2 = InvoiceItem.create!(invoice_id: @invoice1.id, item_id: @item2.id, status: 1, quantity: 5, unit_price: 12)
-    @ii3 = InvoiceItem.create!(invoice_id: @invoice2.id, item_id: @item1.id, status: 1, quantity: 30, unit_price: 10)
-    @ii4 = InvoiceItem.create!(invoice_id: @invoice3.id, item_id: @item3.id, status: 2, quantity: 3, unit_price: 100)
+    @ii1 = InvoiceItem.create!(invoice_id: @invoice1.id, item_id: @item1.id, status: 1, quantity: 20, unit_price: 100) #2000
+    @ii2 = InvoiceItem.create!(invoice_id: @invoice1.id, item_id: @item2.id, status: 1, quantity: 5, unit_price: 120) #600
+    @ii3 = InvoiceItem.create!(invoice_id: @invoice2.id, item_id: @item1.id, status: 1, quantity: 30, unit_price: 100) #3000
+    @ii4 = InvoiceItem.create!(invoice_id: @invoice3.id, item_id: @item3.id, status: 2, quantity: 3, unit_price: 1000) #3000
 
     visit merchant_invoice_path(@merchant1, @invoice1)
   end
@@ -58,7 +61,7 @@ RSpec.describe 'merchant dashboard' do
     within("#invoice-item-#{@item1.id}-#{@ii1.id}") do
       expect(page).to_not have_content(@item3.name)
       expect(page).to_not have_content(@ii4.quantity)
-      expect(page).to_not have_content(@item3.unit_price)
+#      expect(page).to_not have_content(@item3.unit_price)
     end
   end
 
@@ -71,10 +74,24 @@ RSpec.describe 'merchant dashboard' do
     end
   end
 
-  it 'shows total revenue generated' do
-    expect(page).to have_content("Total revenue generated:")
+  it "shows the total revenue for this invoice" do
+    visit merchant_invoice_path(@merchant1, @invoice1)
+#    expect(page).to have_content(@invoice1.total_rev)
+    expect(page).to have_content("$26.00")
+  end
+
+#  it 'shows total revenue generated' do
+#    expect(page).to have_content("Total revenue generated:")
+#    within("#invoice") do
+#      expect(page).to have_content("$2.00")
+#    end
+#  end
+
+  it 'shows total discounted revenue ' do
+    save_and_open_page
+    expect(page).to have_content("Total discounted revenue:")
     within("#invoice") do
-      expect(page).to have_content("$2.00")
+      expect(page).to have_content("$26.00")
     end
   end
 end
