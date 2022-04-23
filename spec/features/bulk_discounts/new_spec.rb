@@ -12,7 +12,7 @@ RSpec.describe "Bulk Discount new page" do
     fill_in('percentage', with: 10)
     fill_in('quantity_threshold', with: 10)
 
-    click_button("Submit")
+    click_button("Create")
     expect(current_path).to eq( merchant_bulk_discounts_path(@merch))
     expect(page).to have_content("May the Fourth")
   end
