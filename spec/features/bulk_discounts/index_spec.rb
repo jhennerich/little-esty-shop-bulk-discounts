@@ -51,7 +51,6 @@ RSpec.describe 'Bulk Discount Index Page' do
 
   it 'displays bulk discounts information' do
     click_on("View all Discounts")
-    save_and_open_page
     expect(page).to have_content(@bulk_discount.name)
     expect(page).to have_content(@bulk_discount.percentage)
     expect(page).to have_content(@bulk_discount.quantity_threshold)
