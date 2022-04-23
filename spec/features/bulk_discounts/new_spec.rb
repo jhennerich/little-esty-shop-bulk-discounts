@@ -1,4 +1,6 @@
-RSpec.describe "Applications new page" do
+require 'rails_helper'
+
+RSpec.describe "Bulk Discount new page" do
   before :each do
     @merch = Merchant.create(name:"StarWars R Us")
     @bulk_discount = BulkDiscount.create(name: "DiscountA", percentage: 10, quantity_threshold: 10)

@@ -2,13 +2,12 @@
   <%= form_with url: new_merchant_bulk_discount_path(@merchant), method: :get, local: true do |f| %>
     <%= f.submit "New Discount" %>
     <% end %>
-
  <% @merchant.bulk_discounts.each do |discount| %>
      <section id="discount-<%= discount.id %>">
          <h2><%= link_to "#{discount.name}", merchant_bulk_discount_path(@merchant,discount) %></h2>
          <h3>Percentage Discount: <%= discount.percentage %>%</h3>
          <h3>Quantity Threshold: <%= discount.quantity_threshold %></h3>
-         <%= link_to 'Edit Discount', "/merchant/#{@merchant.id}/#{discount.id}/edit" %>
+         <%= link_to 'Edit Discount', edit_merchant_bulk_discount_path(@merchant,discount) %>
          <%= link_to 'Delete Discount', merchant_bulk_discount_path(@merchant, discount.id),  method: :delete %>
      </section>
  <% end %>
