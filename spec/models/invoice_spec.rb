@@ -36,7 +36,7 @@ RSpec.describe Invoice, type: :model do
     end
 
     it "#format_time" do
-      expect(@invoice2.format_time).to eq(Time.now.strftime('%A, %B %e, %Y'))
+      expect(@invoice2.format_time).to eq(Time.now.utc.strftime('%A, %B %e, %Y'))
     end
   end
 end

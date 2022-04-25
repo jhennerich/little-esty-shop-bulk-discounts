@@ -76,7 +76,6 @@ RSpec.describe 'merchant dashboard' do
 
   it "shows the total revenue for this invoice" do
     visit merchant_invoice_path(@merchant1, @invoice1)
-#    expect(page).to have_content(@invoice1.total_rev)
     expect(page).to have_content("$26.00")
   end
 
@@ -88,7 +87,7 @@ RSpec.describe 'merchant dashboard' do
 #  end
 
   it 'shows total discounted revenue ' do
-    save_and_open_page
+#    save_and_open_page
     expect(page).to have_content("Total discounted revenue:")
     within("#invoice") do
       expect(page).to have_content("$26.00")
