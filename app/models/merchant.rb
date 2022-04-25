@@ -11,6 +11,17 @@ class Merchant < ApplicationRecord
 
   enum status: {disabled: 0, enabled: 1}
 
+  def favorite_customers
+    transactions.joins(invoice: :customer)
+                .where('result = ?', 1)
+                .where("invoices.status = ?", 2)
+                .select("customers.*, count('transactions.result') as top_result")
+                .group('customers.id')
+                .order(top_result: :desc)
+                .distinct
+                .limit(5)
+  end
+
   def most_popular_items
     items.joins(invoices: :transactions)
     .select('items.*, sum(invoice_items.quantity * invoice_items.unit_price) as total_revenue')
