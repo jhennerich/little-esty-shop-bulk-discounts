@@ -47,14 +47,10 @@ RSpec.describe 'Bulk Discount Show Page' do
     @transaction6 = Transaction.create!(credit_card_number: 879799, result: 1, invoice_id: @invoice_7.id)
     @transaction7 = Transaction.create!(credit_card_number: 203942, result: 1, invoice_id: @invoice_2.id)
 
-    visit merchant_dashboard_index_path(@merchant1)
+    visit merchant_bulk_discount_path(@merchant1,@bulk_discount)
   end
 
   it "displays bulk discount information on show page" do
-    click_on("View all Discounts")
-    click_on(@bulk_discount.name)
-
-    expect(current_path).to eq( merchant_bulk_discount_path(@merchant1,@bulk_discount))
 
     expect(page).to have_content(@bulk_discount.name)
     expect(page).to have_content(@bulk_discount.percentage)
