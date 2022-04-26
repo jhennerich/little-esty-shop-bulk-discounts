@@ -1,5 +1,11 @@
  <h1> <%= @merchant.name %> Bulk Discounts</h1>
  <h2>Upcoming Holidays</h2>
+ <% @facade.holidays.each do |element| %>
+ <h4> <%= element.name element.date %></h4>
+  <% end %>
+
+
+
  <hr>
   <%= form_with url: new_merchant_bulk_discount_path(@merchant), method: :get, local: true do |f| %>
     <%= f.submit "New Discount" %>

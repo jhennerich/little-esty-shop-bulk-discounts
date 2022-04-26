@@ -69,4 +69,17 @@ RSpec.describe 'Bulk Discount Index Page' do
     click_on(@bulk_discount.name)
     expect(current_path).to eq("/merchants/#{@merchant1.id}/bulk_discounts/#{@bulk_discount.id}")
   end
+
+  it "has upcoming holidays" do
+
+    expect(page).to have_content("Upcoming Holidays")
+    expect(page).to have_content("Memorial Day")
+    expect(page).to have_content("2022-05-30")
+
+    expect(page).to have_content("Juneteenth")
+    expect(page).to have_content("2022-06-20")
+
+    expect(page).to have_content("Independence Day")
+    expect(page).to have_content("2022-07-04")
+  end
 end
