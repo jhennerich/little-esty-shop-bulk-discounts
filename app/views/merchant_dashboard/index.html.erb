@@ -1,5 +1,6 @@
 <h1><%= @merchant.name %></h1>
 <div id="index-buttons">
+  <%= button_to 'Dashboard', merchant_dashboard_index_path(@merchant), method: :get %>
   <%= button_to 'Items Index', merchant_items_path(@merchant), method: :get %>
   <%= button_to 'Invoices Index', merchant_invoices_path(@merchant), method: :get %>
   <%= button_to 'View all Discounts', merchant_bulk_discounts_path(@merchant), method: :get %>
@@ -9,9 +10,9 @@
 
 <h2>Top Five Customers</h2>
 <div id="top-customers">
-  <% @customers.each do |customer| %>
+  <% @merchant.favorite_customers.each do |customer| %>
     <strong><p><%= customer.first_name %></p></strong>
-    Succsessful transactions: <%= customer.succsessful_transaction_count %>
+    <%= customer.top_result %> Purchases
   <% end %>
 </div>
 
@@ -25,8 +26,8 @@
       <th>Invoice Number</th>
       <th>Invoice Opened</th>
     </tr>
-    <% @invoice_items_to_ship.each do |invoice_item| %>
-      <tr>
+    <% @merchant.unshipped_invoice_items.each do |invoice_item| %>
+    <tr>
         <div id="unshipped_invoice_item_<%= invoice_item.invoice_item_id %>">
           <td> <%= invoice_item.name %> </td>
           <td> <a href="/merchants/<%= @merchant.id %>/invoices/<%= invoice_item.invoice_id %>/"><%=invoice_item.invoice_id%></a> </td>

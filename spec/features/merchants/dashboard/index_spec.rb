@@ -3,36 +3,79 @@ require 'time'
 
 RSpec.describe 'merchant dashboard' do
   before :each do
-    @merchant1 = Merchant.create!(name: "Pabu")
 
-    @customer1 = Customer.create!(first_name: "John", last_name: "H")
-    @invoice1 = @customer1.invoices.create!(status: "completed")
-    @transactions_1a = @invoice1.transactions.create!(credit_card_number: '1234567812345678', result: 'success')
-    @transactions_1b = @invoice1.transactions.create!(credit_card_number: '1234567812345679', result: 'success')
-    @transactions_1c = @invoice1.transactions.create!(credit_card_number: '1234567812345670', result: 'success')
-    @transactions_1d = @invoice1.transactions.create!(credit_card_number: '1234567812345671', result: 'success')
+    @merchant1 = Merchant.create!(name: 'Hair Care')
 
-    @customer2 = Customer.create!(first_name: "Joseph", last_name: "D")
-    @invoice2 = @customer2.invoices.create!(status: "completed")
-    @transactions_2a = @invoice2.transactions.create!(credit_card_number: '1234567812345678', result: 'success')
-    @transactions_2b = @invoice2.transactions.create!(credit_card_number: '1234567812345679', result: 'success')
-    @transactions_2c = @invoice2.transactions.create!(credit_card_number: '1234567812345670', result: 'success')
+    @customer_1 = Customer.create!(first_name: 'Joey', last_name: 'Smith')
+    @customer_2 = Customer.create!(first_name: 'Cecilia', last_name: 'Jones')
+    @customer_3 = Customer.create!(first_name: 'Mariah', last_name: 'Carrey')
+    @customer_4 = Customer.create!(first_name: 'Leigh Ann', last_name: 'Bron')
+    @customer_5 = Customer.create!(first_name: 'Sylvester', last_name: 'Nader')
+    @customer_6 = Customer.create!(first_name: 'Herber', last_name: 'Kuhn')
 
-    @customer3 = Customer.create!(first_name: "Ian", last_name: "R")
-    @invoice3 = @customer3.invoices.create!(status: "completed")
-    @transactions_3a = @invoice3.transactions.create!(credit_card_number: '1234567812345678', result: 'success')
+    @invoice_1 = Invoice.create!(customer_id: @customer_1.id, status: 1)
+    @invoice_2 = Invoice.create!(customer_id: @customer_1.id, status: 1)
+    @invoice_3 = Invoice.create!(customer_id: @customer_2.id, status: 1)
+    @invoice_4 = Invoice.create!(customer_id: @customer_3.id, status: 1)
+    @invoice_5 = Invoice.create!(customer_id: @customer_4.id, status: 1)
+    @invoice_6 = Invoice.create!(customer_id: @customer_5.id, status: 1)
+    @invoice_7 = Invoice.create!(customer_id: @customer_6.id, status: 0)
 
-    @customer4 = Customer.create!(first_name: "Loki", last_name: "R")
-    @invoice4 = @customer4.invoices.create!(status: "completed")
-    @transactions_4a = @invoice4.transactions.create!(credit_card_number: '1234567812345678', result: 'success')
-    @transactions_4b = @invoice4.transactions.create!(credit_card_number: '1234567812345679', result: 'success')
-    @transactions_4c = @invoice4.transactions.create!(credit_card_number: '1234567812345670', result: 'success')
-    @transactions_4d = @invoice4.transactions.create!(credit_card_number: '1234567812345671', result: 'success')
-    @transactions_4e = @invoice4.transactions.create!(credit_card_number: '1234567812345671', result: 'success')
+    @item_1 = Item.create!(name: "Shampoo", description: "This washes your hair", unit_price: 10, merchant_id: @merchant1.id)
+    @item_2 = Item.create!(name: "Conditioner", description: "This makes your hair shiny", unit_price: 8, merchant_id: @merchant1.id)
+    @item_3 = Item.create!(name: "Brush", description: "This takes out tangles", unit_price: 5, merchant_id: @merchant1.id)
+    @item_4 = Item.create!(name: "Hair tie", description: "This holds up your hair", unit_price: 1, merchant_id: @merchant1.id)
 
-    @customer5 = Customer.create!(first_name: "Amanda", last_name: "A")
-    @invoice5 = @customer5.invoices.create!(status: "completed")
-    @transactions_5a = @invoice5.transactions.create!(credit_card_number: '1234567812345678', result: 'failed')
+    @ii_1 = InvoiceItem.create!(invoice_id: @invoice_1.id, item_id: @item_1.id, quantity: 1, unit_price: 10, status: 0)
+    @ii_2 = InvoiceItem.create!(invoice_id: @invoice_1.id, item_id: @item_2.id, quantity: 1, unit_price: 8, status: 0)
+    @ii_3 = InvoiceItem.create!(invoice_id: @invoice_2.id, item_id: @item_3.id, quantity: 1, unit_price: 5, status: 2)
+    @ii_4 = InvoiceItem.create!(invoice_id: @invoice_3.id, item_id: @item_4.id, quantity: 1, unit_price: 5, status: 1)
+    @ii_5 = InvoiceItem.create!(invoice_id: @invoice_4.id, item_id: @item_4.id, quantity: 1, unit_price: 5, status: 1)
+    @ii_6 = InvoiceItem.create!(invoice_id: @invoice_5.id, item_id: @item_4.id, quantity: 1, unit_price: 5, status: 1)
+    @ii_7 = InvoiceItem.create!(invoice_id: @invoice_6.id, item_id: @item_4.id, quantity: 1, unit_price: 5, status: 1)
+
+    @transaction1 = Transaction.create!(credit_card_number: 203942, result: "success", invoice_id: @invoice_1.id)
+    @transaction2 = Transaction.create!(credit_card_number: 230948, result: "success", invoice_id: @invoice_3.id)
+    @transaction3 = Transaction.create!(credit_card_number: 234092, result: "success", invoice_id: @invoice_4.id)
+    @transaction4 = Transaction.create!(credit_card_number: 230429, result: "success", invoice_id: @invoice_5.id)
+    @transaction5 = Transaction.create!(credit_card_number: 102938, result: "success", invoice_id: @invoice_6.id)
+    @transaction6 = Transaction.create!(credit_card_number: 879799, result: "success", invoice_id: @invoice_7.id)
+    @transaction7 = Transaction.create!(credit_card_number: 203942, result: "success", invoice_id: @invoice_2.id)
+
+
+
+
+#    @merchant1 = Merchant.create!(name: "Pabu")
+
+    #
+    # @customer1 = Customer.create!(first_name: "John", last_name: "H")
+    # @invoice1 = @customer1.invoices.create!(status: "completed")
+    # @transactions_1a = @invoice1.transactions.create!(credit_card_number: '1234567812345678', result: 'success')
+    # @transactions_1b = @invoice1.transactions.create!(credit_card_number: '1234567812345679', result: 'success')
+    # @transactions_1c = @invoice1.transactions.create!(credit_card_number: '1234567812345670', result: 'success')
+    # @transactions_1d = @invoice1.transactions.create!(credit_card_number: '1234567812345671', result: 'success')
+    #
+    # @customer2 = Customer.create!(first_name: "Joseph", last_name: "D")
+    # @invoice2 = @customer2.invoices.create!(status: "completed")
+    # @transactions_2a = @invoice2.transactions.create!(credit_card_number: '1234567812345678', result: 'success')
+    # @transactions_2b = @invoice2.transactions.create!(credit_card_number: '1234567812345679', result: 'success')
+    # @transactions_2c = @invoice2.transactions.create!(credit_card_number: '1234567812345670', result: 'success')
+    #
+    # @customer3 = Customer.create!(first_name: "Ian", last_name: "R")
+    # @invoice3 = @customer3.invoices.create!(status: "completed")
+    # @transactions_3a = @invoice3.transactions.create!(credit_card_number: '1234567812345678', result: 'success')
+    #
+    # @customer4 = Customer.create!(first_name: "Loki", last_name: "R")
+    # @invoice4 = @customer4.invoices.create!(status: "completed")
+    # @transactions_4a = @invoice4.transactions.create!(credit_card_number: '1234567812345678', result: 'success')
+    # @transactions_4b = @invoice4.transactions.create!(credit_card_number: '1234567812345679', result: 'success')
+    # @transactions_4c = @invoice4.transactions.create!(credit_card_number: '1234567812345670', result: 'success')
+    # @transactions_4d = @invoice4.transactions.create!(credit_card_number: '1234567812345671', result: 'success')
+    # @transactions_4e = @invoice4.transactions.create!(credit_card_number: '1234567812345671', result: 'success')
+    #
+    # @customer5 = Customer.create!(first_name: "Amanda", last_name: "A")
+    # @invoice5 = @customer5.invoices.create!(status: "completed")
+    # @transactions_5a = @invoice5.transactions.create!(credit_card_number: '1234567812345678', result: 'failed')
 
     visit merchant_dashboard_index_path(@merchant1)
   end
@@ -117,19 +160,23 @@ RSpec.describe 'merchant dashboard' do
 
   it 'shows top 5 customers' do
     within("#top-customers") do
-      expect("Loki").to appear_before("John")
-      expect("John").to appear_before("Joseph")
-      expect("Joseph").to appear_before("Ian")
 
-      expect(page).to have_content(@customer1.first_name)
-      expect(page).to have_content(@customer1.succsessful_transaction_count)
-      expect(page).to have_content(@customer2.first_name)
-      expect(page).to have_content(@customer2.succsessful_transaction_count)
-      expect(page).to have_content(@customer3.first_name)
-      expect(page).to have_content(@customer3.succsessful_transaction_count)
-      expect(page).to have_content(@customer4.first_name)
-      expect(page).to have_content(@customer4.succsessful_transaction_count)
-      expect(page).to_not have_content(@customer5.first_name)
+      expect("Joey").to appear_before("Cecilia")
+      expect("Cecilia").to appear_before("Mariah")
+      expect("Mariah").to appear_before("Leigh")
+
     end
   end
+
+  it "can see a section for Items Ready to Ship with list of names of items ordered and ids" do
+
+     expect(page).to have_content(@item_1.name)
+     expect(page).to have_content(@item_1.invoice_ids.first)
+
+     expect(page).to have_content(@item_2.name)
+     expect(page).to have_content(@item_2.invoice_ids.first)
+
+     expect(page).to have_no_content(@item_3.name)
+     expect(page).to have_no_content(@item_3.invoice_ids.first)
+   end
 end

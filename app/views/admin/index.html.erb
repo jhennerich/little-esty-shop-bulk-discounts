@@ -1,5 +1,6 @@
 <h1>Admin Dashboard</h1>
 
+<p><%= link_to "Admin: Dashboard", "/admin" %></p>
 <p><%= link_to "Admin: Merchants", "/admin/merchants" %></p>
 <p><%= link_to "Admin: Invoices", "/admin/invoices" %></p>
 
@@ -11,10 +12,8 @@
       <%= customer.succsessful_transaction_count %> purchase(s)</li></p>
     </div>
   <% end %>
-</div><br><br>
-
-
-
+</div>
+<hr>
 <div id='invoices'>
   <h3>Incomplete Invoices:</h3>
   <% @invoices.each do |invoice| %>

@@ -13,8 +13,8 @@ class Merchant < ApplicationRecord
 
   def favorite_customers
     transactions.joins(invoice: :customer)
-                .where('result = ?', 1)
-                .where("invoices.status = ?", 2)
+                .where('result = ?', 'success')
+                .where("invoices.status = ?", 1)
                 .select("customers.*, count('transactions.result') as top_result")
                 .group('customers.id')
                 .order(top_result: :desc)
@@ -39,7 +39,7 @@ class Merchant < ApplicationRecord
   end
 
   def best_date_by_revenue
-wip =  invoices.joins(:transactions)
+    invoices.joins(:transactions)
     .where('transactions.result = ?', 'success')
     .where(status: "completed")
     .select('invoices.*, sum(invoice_items.quantity * invoice_items.unit_price) as revenue')
