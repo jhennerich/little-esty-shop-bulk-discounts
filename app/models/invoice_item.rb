@@ -14,7 +14,7 @@ class InvoiceItem < ApplicationRecord
   enum status: {pending: 0, packaged: 1, shipped: 2}
 
   def discount_used
-     wip = bulk_discounts.where("#{quantity} >= bulk_discounts.quantity_threshold")
+     bulk_discounts.where("#{quantity} >= bulk_discounts.quantity_threshold")
     .order(percentage: :desc)
     .first
   end
