@@ -13,8 +13,8 @@ class InvoiceItem < ApplicationRecord
 
   enum status: {pending: 0, packaged: 1, shipped: 2}
 
-  def discounted_amount
-    bulk_discounts.where("quantity_threshold <= ?", quantity)
-    .maximum(:percentage)
-  end
+#  def discounted_amount
+#    bulk_discounts.where("quantity_threshold <= ?", quantity)
+#    .maximum(:percentage)
+#  end
 end

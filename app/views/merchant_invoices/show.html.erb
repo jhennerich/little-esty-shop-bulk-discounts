@@ -5,18 +5,19 @@
   <p><strong>Invoice created time: </strong><%= @invoice.created_at.strftime("%A, %b %d, %Y") %></p>
   <p><strong>Invoice customer: </strong><%= @invoice.customer.first_name %> <%= @invoice.customer.last_name%></p>
   <p><strong>Total revenue generated: </strong><%= number_to_currency(@invoice.total_rev/100, precision: 2) %></p>
+  <p><strong>Bulk discount savings: </strong><%= number_to_currency(@invoice.total_discount/100, precision: 2) %></p>
   <p><strong>Total discounted revenue: </strong><%= number_to_currency(@invoice.total_discounted_rev/100, precision: 2) %></p>
 
 </div>
 <hr>
 <h2>Invoice Items</h2>
-<% @items.each do |item| %>
+<% @invoice.items.each do |item| %>
   <% item.invoice_items.each do |invoice_item| %>
     <div id="invoice-item-<%= invoice_item.item_id %>-<%= invoice_item.id %>">
       <h4><%= invoice_item.item.name %></h4>
       <tr>
         <td><strong>Quantity: </strong><%= invoice_item.quantity %></td><br>
-        <td><strong>Price: </strong><%= invoice_item.unit_price %></td><br>
+        <td><strong>Price: </strong><%= number_to_currency(invoice_item.unit_price/100, percision: 3) %></td><br>
         <td><strong>Invoice item status: <%= invoice_item.status %></strong><br>
 
         <%= form_with url: merchant_invoice_path(item.merchant_id, @invoice.id), method: :patch, local: true do |form| %>

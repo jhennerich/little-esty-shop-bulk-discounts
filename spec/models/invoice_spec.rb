@@ -57,8 +57,8 @@ RSpec.describe Invoice, type: :model do
       @invoice_1 = Invoice.create!(customer_id: @customer_1.id, status: 1)
       @invoice_2 = Invoice.create!(customer_id: @customer_2.id, status: 1)
 
-      @ii_1 = InvoiceItem.create!(invoice_id: @invoice_1.id, item_id: @item_1.id, quantity: 10, unit_price: 1000, status: 2)
-      @ii_2 = InvoiceItem.create!(invoice_id: @invoice_1.id, item_id: @item_2.id, quantity: 10, unit_price: 1000, status: 1)
+      @ii_1 = InvoiceItem.create!(invoice_id: @invoice_1.id, item_id: @item_1.id, quantity: 10, unit_price: 1000, status: 2) #rev 10000
+      @ii_2 = InvoiceItem.create!(invoice_id: @invoice_1.id, item_id: @item_2.id, quantity: 10, unit_price: 1000, status: 1) #rev 10000
 
 
       @ii_3 = InvoiceItem.create!(invoice_id: @invoice_2.id, item_id: @item_3.id, quantity: 5, unit_price: 1000, status: 2)
@@ -71,7 +71,7 @@ RSpec.describe Invoice, type: :model do
 
 
       expect(@invoice_1.total_discounted_rev).to eq(160)
-      binding.pry
+#      binding.pry
       expect(@invoice_2.total_discounted_rev).to eq(150)
     end
   end

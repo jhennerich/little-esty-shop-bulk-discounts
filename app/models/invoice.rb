@@ -24,24 +24,15 @@ class Invoice < ApplicationRecord
     invoice_items.sum("quantity * unit_price")
   end
 
-  def total_discounted_rev
-#    merch_id = merchants.group(:id).first.id
-#    best_discount = bulk_discounts.where(merchant_id: merch_id).group(:id).order(:percentage).last
-#    binding.pry
-#    invoice_items.each do |inv|
-#      binding.pry
-#      inv.discounted_amount
-#    end
+  def total_discount
+      discount = invoice_items.joins(:bulk_discounts)
+              .where('invoice_items.quantity >= bulk_discounts.quantity_threshold')
+              .select('invoice_items.*, max(invoice_items.unit_price * invoice_items.quantity *(bulk_discounts.percentage)/100.00) as total_discount')
+              .group('invoice_items.id')
+              .sum(&:total_discount)
+  end
 
-#    invoice_items.where
-#    merchants.group(:id).where('bulk_discount.quantity_threshold = ?', '10')
-#    array = invoice_items.joins(item: :bulk_discounts)
-#            .where('quantity >= bulk_discounts.quantity_threshold').group(:id)
-#    discount = invoice_items.joins(:bulk_discounts)
-#                                      .where('invoice_items.quantity >= bulk_discounts.quantity')
-#                                      .select('invoice_items.id, max(invoice_items.unit_price * invoice_items.quantity *(bulk_discounts.discount)/100.00) as total_discount')
-#                                      .group('invoice_items.id')
-#                                      .sum(&:total_discount)
-#    total_rev - discount
+  def total_discounted_rev
+    total_rev - total_discount
   end
 end
