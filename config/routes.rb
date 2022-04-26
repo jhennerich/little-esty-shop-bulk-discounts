@@ -4,9 +4,10 @@ Rails.application.routes.draw do
     resources :dashboard, controller: 'merchant_dashboard', only: [:index]
     resources :items, controller: 'merchant_items'
     resources :invoices, controller: 'merchant_invoices', only: [:index, :show, :update]
-    resources :bulk_discounts 
+    resources :bulk_discounts
   end
 
+  get '/', to: 'admin#index'
   get '/admin', to: 'admin#index'
 
   get '/admin/merchants', to: 'admin_merchants#index'
