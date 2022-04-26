@@ -1,7 +1,8 @@
  <h1> <%= @merchant.name %> Bulk Discounts</h1>
  <h2>Upcoming Holidays</h2>
- <% @facade.holidays.each do |element| %>
- <h4> <%= element.name element.date %></h4>
+ <% @facade.holidays[0..2].each do |element| %>
+ <h4> <%= element.name %>
+      <%= element.date %>
   <% end %>
 
 

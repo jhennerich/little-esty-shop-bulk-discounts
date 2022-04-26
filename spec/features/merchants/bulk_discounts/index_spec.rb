@@ -46,7 +46,7 @@ RSpec.describe 'Bulk Discount Index Page' do
     @transaction6 = Transaction.create!(credit_card_number: 879799, result: 1, invoice_id: @invoice_7.id)
     @transaction7 = Transaction.create!(credit_card_number: 203942, result: 1, invoice_id: @invoice_2.id)
 
-    visit merchant_dashboard_index_path(@merchant1)
+    visit merchant_bulk_discounts_path(@merchant1)
   end
 
   it 'displays bulk discounts information' do
@@ -72,8 +72,9 @@ RSpec.describe 'Bulk Discount Index Page' do
 
   it "has upcoming holidays" do
 
+    save_and_open_page
+    #binding.pry
     expect(page).to have_content("Upcoming Holidays")
-    binding.pry
     expect(page).to have_content("Memorial Day")
     expect(page).to have_content("2022-05-30")
 

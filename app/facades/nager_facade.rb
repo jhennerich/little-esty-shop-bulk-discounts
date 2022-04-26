@@ -1,7 +1,8 @@
 class NagerFacade
+
   def holidays
-    service.get_holdiday.map do |data|
-      Holidays.new(data)
+    service.get_holidays.map do |data|
+      Holiday.new(data)
     end
   end
 
