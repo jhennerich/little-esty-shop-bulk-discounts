@@ -73,6 +73,7 @@ RSpec.describe 'Bulk Discount Index Page' do
   it "has upcoming holidays" do
 
     expect(page).to have_content("Upcoming Holidays")
+    binding.pry
     expect(page).to have_content("Memorial Day")
     expect(page).to have_content("2022-05-30")
 
