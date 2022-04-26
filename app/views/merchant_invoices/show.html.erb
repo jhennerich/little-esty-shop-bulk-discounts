@@ -17,7 +17,7 @@
 <h2>Invoice Items</h2>
   <% @invoice.invoice_items.each do |invoice_item| %>
     <div id="invoice-item-<%= invoice_item.item_id %>-<%= invoice_item.id %>">
-      <h4><%= invoice_item.item.name %></h4>
+      <h3><%= invoice_item.item.name %></h3>
       <tr>
         <td><strong>Quantity: </strong><%= invoice_item.quantity %></td><br>
         <td><strong>Price: </strong><%= number_to_currency(invoice_item.unit_price/100, percision: 3) %></td><br>
