@@ -5,8 +5,12 @@
   <p><strong>Invoice created time: </strong><%= @invoice.created_at.strftime("%A, %b %d, %Y") %></p>
   <p><strong>Invoice customer: </strong><%= @invoice.customer.first_name %> <%= @invoice.customer.last_name%></p>
   <p><strong>Total revenue generated: </strong><%= number_to_currency(@invoice.total_rev/100, precision: 2) %></p>
+  <% if @invoice.qualifiy_for_discount? %>
   <p><strong>Bulk discount savings: </strong><%= number_to_currency(@invoice.total_discount/100, precision: 2) %></p>
   <p><strong>Total discounted revenue: </strong><%= number_to_currency(@invoice.total_discounted_rev/100, precision: 2) %></p>
+  <% else %>
+  <p>No discounts</p>
+  <% end %>
 
 </div>
 <hr>

@@ -24,6 +24,11 @@ class Invoice < ApplicationRecord
     invoice_items.sum("quantity * unit_price")
   end
 
+  def qualifiy_for_discount?
+    q =  invoice_items.joins(:bulk_discounts)
+      .where('invoice_items.quantity >= bulk_discounts.quantity_threshold')
+  end
+
   def total_discount
       discount = invoice_items.joins(:bulk_discounts)
               .where('invoice_items.quantity >= bulk_discounts.quantity_threshold')
