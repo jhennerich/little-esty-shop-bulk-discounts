@@ -51,7 +51,7 @@ RSpec.describe 'merchant dashboard' do
       expect(page).to have_content("Quantity:")
       expect(page).to have_content(@ii1.quantity)
       expect(page).to have_content("Price:")
-      expect(page).to have_content(@item1.unit_price)
+      expect(page).to have_content("$1.00")
       expect(page).to have_content("Invoice item status:")
       expect(page).to have_content(@ii1.status)
     end
@@ -90,7 +90,7 @@ RSpec.describe 'merchant dashboard' do
 #    save_and_open_page
     expect(page).to have_content("Total discounted revenue:")
     within("#invoice") do
-      expect(page).to have_content("$26.00")
+      expect(page).to have_content("$23.40")
     end
   end
 end

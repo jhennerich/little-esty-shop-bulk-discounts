@@ -50,7 +50,6 @@ RSpec.describe 'Bulk Discount Index Page' do
   end
 
   it 'displays bulk discounts information' do
-    click_on("View all Discounts")
     expect(page).to have_content(@bulk_discount.name)
     expect(page).to have_content(@bulk_discount.percentage)
     expect(page).to have_content(@bulk_discount.quantity_threshold)
@@ -63,7 +62,6 @@ RSpec.describe 'Bulk Discount Index Page' do
   end
 
   it "has a link to each discounts show page" do
-    click_on("View all Discounts")
     expect(page).to have_link(@bulk_discount.name)
     expect(page).to have_link(@bulk_discount2.name)
     click_on(@bulk_discount.name)
@@ -72,8 +70,6 @@ RSpec.describe 'Bulk Discount Index Page' do
 
   it "has upcoming holidays" do
 
-    save_and_open_page
-    #binding.pry
     expect(page).to have_content("Upcoming Holidays")
     expect(page).to have_content("Memorial Day")
     expect(page).to have_content("2022-05-30")
