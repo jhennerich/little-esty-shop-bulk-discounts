@@ -36,7 +36,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[Little Esty Shop](https://les-jhennerich.herokuapp.com/)  is a two-part project for the Turing School of Software & Design. The application resembles an e-commerce platform where merchants and administrators can manage inventory and fulfill customer invoices, and customers can make purchases. The project is broken into two parts, the first being a 4 person group project with the collaborators mentioned below, and the second part being a solo project
+[Little Esty Shop](https://les-jhennerich.herokuapp.com/)  is a two-part project for the Turing School of Software & Design. The application resembles an e-commerce platform where merchants and administrators can manage inventory and fulfill customer invoices, and customers can make purchases. The project is broken into two parts, the first a 4 person group project, and a solo project.
 
 User stories tracked using [Github projects](https://github.com/jhennerich/little-esty-shop/projects/1).
 
