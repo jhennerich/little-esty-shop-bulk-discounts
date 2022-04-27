@@ -104,6 +104,10 @@ RSpec.describe Merchant, type: :model do
         expect(Merchant.top_5_merchants).to eq([@merchant2, @merchant4, @merchant3, @merchant1, @merchant6])
       end
 
+      it '#favorite_customers' do
+        expect(@merchant1.favorite_customers.first.id).to eq(@customer1.id)
+      end
+
       it '#total_rev' do
         expect(@merchant1.total_rev).to eq(1000)
       end
