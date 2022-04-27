@@ -1,38 +1,102 @@
+<!--
+*** Thanks for checking out the Best-README-Template. If you have a suggestion
+*** that would make this better, please fork the repo and create a pull request
+*** or simply open an issue with the tag "enhancement".
+*** Thanks again! Now go create something AMAZING! :D
+***
+***
+***
+*** To avoid retyping too much info. Do a search and replace for the following:
+*** github_username, repo_name, twitter_handle, email, project_title, project_description
+-->
+
+
+
+<!-- PROJECT SHIELDS -->
+<!--
+*** I'm using markdown "reference style" links for readability.
+*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
+*** See the bottom of this document for the declaration of the reference variables
+*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
+*** https://www.markdownguide.org/basic-syntax/#reference-style-links
+-->
+
 # Little Esty Shop
+<!-- TABLE OF CONTENTS -->
+<summary><h2 style="display: inline-block">Table of Contents</h2></summary>
+<ol>
+  <li><a href="#about-the-project">About The Project</a>
+  <li><a href="#project-board">Project Board</a></li>
+  <li><a href="#built-with">Built With</a>
+  <li><a href="#setup-instructions">Setup Instructions</a></li>
+  <li><a href="#contact">Contact</a></li>
+  <li><a href="#acknowledgements">Acknowledgements</a></li>
+</ol>
 
-## Background and Description
+<!-- ABOUT THE PROJECT -->
+## About The Project
 
-"Little Esty Shop" is a group project that requires students to build a fictitious e-commerce platform where merchants and admins can manage inventory and fulfill customer invoices.
+[Little Esty Shop](https://les-jhennerich.herokuapp.com/)  is a two-part project for the Turing School of Software & Design. The application resembles an e-commerce platform where merchants and administrators can manage inventory and fulfill customer invoices, and customers can make purchases. The project is broken into two parts, the first being a 4 person group project with the collaborators mentioned below, and the second part being a solo project
 
-## Learning Goals
-- Practice designing a normalized database schema and defining model relationships
-- Utilize advanced routing techniques including namespacing to organize and group like functionality together.
-- Utilize advanced active record techniques to perform complex database queries
-- Practice consuming a public API while utilizing POROs as a way to apply OOP principles to organize code
+User stories tracked using [Github projects](https://github.com/jhennerich/little-esty-shop/projects/1).
 
-## Requirements
-- must use Rails 5.2.x
-- must use PostgreSQL
-- all code must be tested via feature tests and model tests, respectively
-- must use GitHub branching, team code reviews via GitHub comments, and github projects to track progress on user stories
-- must include a thorough README to describe the project
-- must deploy completed code to Heroku
+### [Part 1](https://github.com/turingschool-examples/little-esty-shop):
 
-## Setup
+#### Skills Developed in part 1
+* Designed schema with custom tasks for database seeding
+* Used advanced ActiveRecord to perform complex database queries
+* Practiced MVC concepts, effectively staying within rails conventions
+* Consumed github API and utilized POROS as a way to apply OOP principals  
 
-This project requires Ruby 2.7.4.
 
-* Fork this repository
-* Clone your fork
-* From the command line, install gems and set up your DB:
-    * `bundle`
-    * `rails db:create`
-* Run the test suite with `bundle exec rspec`.
-* Run your development server with `rails s` to see the app in action.
+### [Part 2](https://github.com/turingschool-examples/little_esty_shop_bulk_discounts):
 
-## Phases
+#### Skills Developed in part 2
+* Used advanced ActiveRecord to perform complex database queries
+* Practiced MVC concepts, effectively staying within rails conventions
+* Implemented checkout and payment functionality using POROs and Nager Holiday API implementation
+* Deployed application on [Heroku](https://les-jhennerich.herokuapp.com/)
 
-1. [Database Setup](./doc/db_setup.md)
-1. [User Stories](./doc/user_stories.md)
-1. [Extensions](./doc/extensions.md)
-1. [Evaluation](./doc/evaluation.md)
+<!-- PROJECT BOARD -->
+## Project Board
+Check out the [Project board](https://github.com/jhennerich/little-esty-shop/projects/1)
+for a complete list of features / user stories used to develop this application.
+
+<!-- BUILT WITH -->
+## Built With
+
+* [Ruby on Rails](https://rubyonrails.org/)
+* [Postgresql](https://www.postgresql.org/)
+
+<!-- SETUP INSTRUCTIONS -->
+## Setup Instructions
+To get a local copy up and running follow these simple steps.
+
+1. Clone the repo
+   ```
+   git clone https://github.com/jhennerich/little-esty-little_esty_shop_bulk_discounts
+   ```
+2. Install dependencies
+   ```
+   bundle install
+   ```
+3. DB creation/migration
+   ```
+   rails db:create
+   rails db:migrate
+   rails csv_load:all
+   ```
+3. Run tests and view test coverage
+   ```
+   bundle exec rspec
+   open coverage/index.html
+   ```
+4. Run server and navigate to http://localhost:3000/
+   ```
+   rails s
+   ```
+
+OR
+
+1. Visit heroku
+   https://les-jhennerich.herokuapp.com/
